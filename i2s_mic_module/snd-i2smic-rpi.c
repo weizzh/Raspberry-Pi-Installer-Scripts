@@ -68,7 +68,7 @@ static struct asoc_simple_card_info default_card_info = {
   },
   .codec_dai = {
     .name = "snd-soc-dummy-dai",    //"dmic-codec", // -> snd_soc_dai_link.codec_dai_name
-    .sysclk = 12288000
+    .sysclk = 24576000
   },
 };
 
