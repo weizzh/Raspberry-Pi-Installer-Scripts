@@ -81,7 +81,7 @@ echo "Installing..."
 apt-get -y install git raspberrypi-kernel-headers
 
 # Clone the repo
-git clone https://github.com/adafruit/Raspberry-Pi-Installer-Scripts.git
+git clone https://github.com/weizzh/Raspberry-Pi-Installer-Scripts.git
 
 # Build and install the module
 cd Raspberry-Pi-Installer-Scripts/i2s_mic_module
