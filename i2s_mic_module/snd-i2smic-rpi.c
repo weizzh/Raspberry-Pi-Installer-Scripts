@@ -56,6 +56,25 @@ void device_release_callback(struct device *dev) { /*  do nothing */ };
 /*
  * Setup the card info
  */
+
+#define CS5381_RATE_MIN 7190 /* Hz, from data sheet */
+#define CS5381_RATE_MAX 52800  /* Hz, from data sheet */
+
+#define CS5381_FORMATS (SNDRV_PCM_FMTBIT_S24_LE | SNDRV_PCM_FMTBIT_S32_LE)
+
+static struct snd_soc_dai_driver cs5381_dai = {
+	.name = "cs5381-hifi",
+	.capture = {
+		.stream_name = "Capture",
+		.channels_min = 1,
+		.channels_max = 2,
+		.rate_min = CS5381_RATE_MIN,
+		.rate_max = CS5381_RATE_MAX,
+		.rates = SNDRV_PCM_RATE_CONTINUOUS,
+		.formats = CS5381_FORMATS,
+	},
+};
+
 static struct asoc_simple_card_info default_card_info = {
   .card = "snd_rpi_i2s_card",       // -> snd_soc_card.name
   .name = "simple-card_codec_link", // -> snd_soc_dai_link.name
@@ -67,10 +86,15 @@ static struct asoc_simple_card_info default_card_info = {
     .sysclk = 0
   },
   .codec_dai = {
-    .name = "snd-soc-dummy-dai",    //"dmic-codec", // -> snd_soc_dai_link.codec_dai_name
-    .sysclk = 24576000
+    .name = "cs5381-hifi",    //"dmic-codec", // -> snd_soc_dai_link.codec_dai_name
+    .sysclk = 0
   },
 };
+
+
+
+
+
 
 /*
  * Setup the card device
